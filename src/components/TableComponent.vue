@@ -48,7 +48,6 @@ export default {
 table {
     width:100%;
     border-collapse: collapse;
-    background: #323232;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
 }
@@ -88,9 +87,37 @@ td:hover {
     color: white;
 }
 tr:nth-of-type(even) {
-    background: hsl(0 0% 0%/0.1);
+    background: hsla(0, 0%, 32%, 0.1);
 }
 tr:hover, tr:nth-of-type(even):hover {
     background: hsl(0 0% 0%/0.3);
+}
+
+@media (max-width: 650px) {
+    table {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    th {
+        display: none;
+    }
+    caption {
+        background: hsl(231, 85%, 18%);
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+    }
+
+    td {
+        display: grid;
+        grid-template-columns: 18ch auto;
+        padding: 0.75rem 1rem;
+    }
+
+    td::before {
+        content: attr(data-cell) ": ";
+        font-weight: 700;
+        text-transform: capitalize;
+        transition: all 1s ease-in-out;
+    }
 }
 </style>
