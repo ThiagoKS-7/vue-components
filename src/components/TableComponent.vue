@@ -43,6 +43,7 @@ defineProps({
                     role="table-heading" 
                     name="tableHeading" 
                     v-for="columnName in columns" :key="columnName"
+                    @click="emitOrder(columnName)"
                 >
                     {{ columnName }}
                 </th>
@@ -71,6 +72,32 @@ defineProps({
 <script>
 export default {
   name: "TableComponent",
+  data() {
+    return {
+        currentOrder: "",
+        orderJson: {
+            column: "",
+            order: ""
+        }
+    }
+  }, 
+  methods: {
+    emitOrder(columnName) {
+        this.orderJson.column = columnName;
+        this.orderJson.order = this.toggleOrder();
+        this.$emit("orderBy", this.orderJson);
+    },
+    toggleOrder() {
+        switch (this.currentOrder) {
+            case "asc":
+                return "desc";
+            case "desc":
+                return "";
+            default:
+                return "asc";
+        }
+    }
+  }
 }
 </script>
 
